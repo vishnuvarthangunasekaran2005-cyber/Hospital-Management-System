@@ -1,4 +1,4 @@
-const BASE = "http://localhost:5000/api";
+const BASE = "https://hospital-management-system-backend-1p9m.onrender.com/api";
 
 const headers = () => ({
   "Content-Type": "application/json",
