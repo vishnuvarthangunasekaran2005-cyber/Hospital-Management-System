@@ -1,0 +1,22 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+  padding: 16px;
+}
+
+.loginbox {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  border-top: 4px solid #07e83b;
+}
+
+@media (max-width: 480px) {
+  .loginbox { padding: 24px 16px; }
+}
