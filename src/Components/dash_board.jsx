@@ -1,27 +1,50 @@
 import DoctorImage from "../assets/DOCTOR 1.jpg";
 import HospitalLogo from "../assets/Hospital_logo.jpg";
 import { useNavigate } from "react-router-dom";
-//import { useState } from "react";
+import { useState } from "react";
 import "../Styles/dashboard.css";
 
 const Dash_board = () => {
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  
+  const loginDetails = {
+    username: "admin@hospital.com",
+    role: "Administrator",
+    lastLogin: new Date().toLocaleString(),
+    userId: "HMS-001"
+  };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid flex-wrap gap-2">
-          <a className="navbar-brand fw-bold">⚚ Hospital Management System</a>
-          <div className="d-flex flex-wrap align-items-center gap-2 ms-auto">
-            <button type="button" className="btn btn-primary btn-sm">
-              🔔 <span className="badge text-bg-secondary">4</span>
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary btn-sm position-relative"
-            >
-              👤 Profile
-              <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" />
-            </button>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+        <div className="container-fluid">
+          <a className="navbar-brand fw-bold fs-5">⚚ Hospital Management System</a>
+          
+          <div className="d-flex align-items-center ms-auto">
+            <div className="dropdown" style={{ position: 'relative' }}>
+              <button
+                className="btn btn-primary btn-sm dropdown-toggle"
+                type="button"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                👤 Profile
+              </button>
+              {showDropdown && (
+                <div className="dropdown-menu show" style={{ position: 'absolute', right: 0, top: '100%', marginTop: '0.5rem', minWidth: '280px' }}>
+                  <div className="px-3 py-2">
+                    <h6 className="mb-2">Login Details</h6>
+                    <hr className="my-2" />
+                    <p className="mb-1 small"><strong>User ID:</strong> {loginDetails.userId}</p>
+                    <p className="mb-1 small"><strong>Username:</strong> {loginDetails.username}</p>
+                    <p className="mb-1 small"><strong>Role:</strong> {loginDetails.role}</p>
+                    <p className="mb-1 small"><strong>Last Login:</strong> {loginDetails.lastLogin}</p>
+                    <hr className="my-2" />
+                    <button className="btn btn-danger btn-sm w-100" onClick={() => navigate("/")}>Logout</button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
