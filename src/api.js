@@ -1,4 +1,4 @@
-const BASE = "https://hospital-management-system-backend-1p9m.onrender.com/api";
+const BASE = "http://localhost:5000/api";
 
 const headers = () => ({
   "Content-Type": "application/json",
@@ -16,6 +16,9 @@ const api = {
     fetch(`${BASE}/auth/login`, { method: "POST", headers: headers(), body: JSON.stringify(data) }).then((r) => r.json()),
 
   register: (data) =>
+    fetch(`${BASE}/auth/admin/register`, { method: "POST", headers: headers(), body: JSON.stringify(data) }).then((r) => r.json()),
+
+  registerUser: (data) =>
     fetch(`${BASE}/auth/register`, { method: "POST", headers: headers(), body: JSON.stringify(data) }).then((r) => r.json()),
 
   getMe: () =>
@@ -97,6 +100,19 @@ const api = {
 
   deleteUser: (id) =>
     fetch(`${BASE}/admin/users/${id}`, { method: "DELETE", headers: headers() }).then((r) => r.json()),
+
+  // ── Doctors ──
+  getDoctors: (params = "") =>
+    fetch(`${BASE}/doctors?${params}`, { headers: headers() }).then((r) => r.json()),
+
+  addDoctor: (data) =>
+    fetch(`${BASE}/doctors`, { method: "POST", headers: headers(), body: JSON.stringify(data) }).then((r) => r.json()),
+
+  updateDoctor: (id, data) =>
+    fetch(`${BASE}/doctors/${id}`, { method: "PUT", headers: headers(), body: JSON.stringify(data) }).then((r) => r.json()),
+
+  deleteDoctor: (id) =>
+    fetch(`${BASE}/doctors/${id}`, { method: "DELETE", headers: headers() }).then((r) => r.json()),
 };
 
 export default api;

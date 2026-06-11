@@ -64,6 +64,7 @@ const AdminPanel = () => {
           </div>
           <div className="d-flex gap-2 flex-wrap">
             <button className="btn btn-outline-light btn-sm" onClick={() => navigate("/dashboard")}>🏠 Dashboard</button>
+            <Link to="/doctors" className="btn btn-outline-light btn-sm">👨⚕️ Doctors</Link>
             <Link to="/register" className="btn btn-success btn-sm">➕ Add User</Link>
             <button className="btn btn-danger btn-sm" onClick={handleLogout}>🚪 Logout</button>
           </div>
@@ -90,6 +91,8 @@ const AdminPanel = () => {
               { label: "Low Stock",        value: stats.lowStock,             color: "warning" },
               { label: "Out of Stock",     value: stats.outOfStock,           color: "danger" },
               { label: "Appointments",     value: stats.totalAppointments,    color: "primary" },
+              { label: "Total Doctors",    value: stats.totalDoctors || 0,    color: "success" },
+              { label: "Active Doctors",   value: stats.activeDoctors || 0,   color: "info" },
               { label: "Pending Blood",    value: stats.pendingBloodRequests, color: "danger" },
               { label: "System Users",     value: stats.totalUsers,           color: "dark" },
             ].map((s) => (

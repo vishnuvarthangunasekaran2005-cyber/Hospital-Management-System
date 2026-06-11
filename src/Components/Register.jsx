@@ -98,7 +98,10 @@ const Register = () => {
         <hr />
         <div className="d-flex justify-content-between small">
           <Link to="/dashboard" className="text-success">← Dashboard</Link>
-          <Link to="/admin" className="text-primary">Manage Users →</Link>
+          <div>
+            <Link to="/doctors" className="text-primary me-3">Doctors →</Link>
+            <Link to="/admin" className="text-primary">Users →</Link>
+          </div>
         </div>
       </div>
     </div>

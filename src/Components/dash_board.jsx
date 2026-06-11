@@ -5,14 +5,17 @@ import { useState } from "react";
 import "../Styles/dashboard.css";
 
 const Dash_board = () => {
-  const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
+   const navigate = useNavigate();
+   const [showDropdown, setShowDropdown] = useState(false);
+  
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
   
   const loginDetails = {
-    username: "admin@hospital.com",
-    role: "Administrator",
+    username: user.email || "Not logged in",
+    role: user.role === "admin" ? "Administrator" : "Staff",
     lastLogin: new Date().toLocaleString(),
-    userId: "HMS-001"
+    userId: user.id || "N/A",
+    name: user.name || "Guest"
   };
 
   return (
@@ -35,12 +38,16 @@ const Dash_board = () => {
                   <div className="px-3 py-2">
                     <h6 className="mb-2">Login Details</h6>
                     <hr className="my-2" />
-                    <p className="mb-1 small"><strong>User ID:</strong> {loginDetails.userId}</p>
-                    <p className="mb-1 small"><strong>Username:</strong> {loginDetails.username}</p>
+                    <p className="mb-1 small"><strong>Name:</strong> {loginDetails.name}</p>
+                    <p className="mb-1 small"><strong>Email:</strong> {loginDetails.username}</p>
                     <p className="mb-1 small"><strong>Role:</strong> {loginDetails.role}</p>
                     <p className="mb-1 small"><strong>Last Login:</strong> {loginDetails.lastLogin}</p>
                     <hr className="my-2" />
-                    <button className="btn btn-danger btn-sm w-100" onClick={() => navigate("/")}>Logout</button>
+                    <button className="btn btn-danger btn-sm w-100" onClick={() => {
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("user");
+                      navigate("/login");
+                    }}>Logout</button>
                   </div>
                 </div>
               )}
@@ -62,7 +69,7 @@ const Dash_board = () => {
           className="btn btn-outline-danger"
           onClick={() => navigate("/blood_group")}
         >
-          🩸 Blood group Information
+          🩸 Blood Group Information
         </button>
         <button
           type="button"
@@ -71,6 +78,15 @@ const Dash_board = () => {
         >
           💊 Pharmacy Management
         </button>
+        {user.role === "admin" && (
+          <button
+            type="button"
+            className="btn btn-outline-primary"
+            onClick={() => navigate("/doctors")}
+          >
+            👨⚕️ Doctors
+          </button>
+        )}
       </div>
 
       <br></br>
